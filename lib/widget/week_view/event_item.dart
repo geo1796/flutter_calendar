@@ -8,12 +8,18 @@ class EventItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-              width: width,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                color: event.color,
-              ),
-              child: Text(event.title),
-            );
+      width: width,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+        color: event.color,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Text(
+          event.title,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
+    );
   }
 }

@@ -15,9 +15,10 @@ class DraggableEvent extends StatelessWidget {
     final AgendaController agendaController = Get.find();
     final duration = event.end.difference(event.start);
     final heigth = cellHeight * (duration.inMinutes / 60.0);
+    final shouldCrop = heigth > 32.0;
     return Center(
       child: SizedBox(
-        height: heigth > 32.0 ? heigth - 16.0 : heigth,
+        height: shouldCrop ? heigth - 16.0 : heigth,
         child: Draggable<EventDrag>(
           onDragStarted: () => agendaController.dragging.value = true,
           onDragEnd: (_) => agendaController.dragging.value = false,
@@ -27,8 +28,8 @@ class DraggableEvent extends StatelessWidget {
           feedback: Container(),
           child: Container(
             width: width,
-            color: heigth > 32.0 ? event.color : null,
-            decoration: heigth > 32.0
+            color: shouldCrop ? event.color : null,
+            decoration: shouldCrop
                 ? null
                 : BoxDecoration(
                     borderRadius: const BorderRadius.only(

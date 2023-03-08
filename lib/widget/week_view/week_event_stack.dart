@@ -8,8 +8,8 @@ import 'package:flutter_calendar/widget/week_view/event_item.dart';
 import 'package:get/get.dart';
 import '../../util/date_util.dart';
 
-class WeekDayStack extends StatelessWidget {
-  const WeekDayStack(
+class WeekEventStack extends StatelessWidget {
+  const WeekEventStack(
       {super.key, required this.dayWidth, required this.totalWidth});
   final double dayWidth;
   final double totalWidth;
@@ -21,26 +21,29 @@ class WeekDayStack extends StatelessWidget {
       final events = <Event>[];
       final date = agendaController.date.value;
       for (Event event in agendaController.getEventsByWeek(date)) {
-        if (event.start.day != event.end.day) {
-          if (isSameWeek(event.start, date)) {
-            events.add(Event(
-                id: event.id,
-                title: event.title,
-                description: event.description,
-                start: event.start,
-                end: getEndOfDay(event.start),
-                color: event.color));
-          }
-          if (isSameWeek(event.end, date)) {
-            events.add(Event(
-                id: event.id,
-                title: event.title,
-                description: event.description,
-                start: getStartOfDay(event.end),
-                end: event.end,
-                color: event.color));
-          }
-        } else {
+        // if (event.start.day != event.end.day) {
+        //   if (isSameWeek(event.start, date)) {
+        //     events.add(Event(
+        //         id: event.id,
+        //         title: event.title,
+        //         description: event.description,
+        //         start: event.start,
+        //         end: getEndOfDay(event.start),
+        //         color: event.color));
+        //   }
+        //   if (isSameWeek(event.end, date)) {
+        //     events.add(Event(
+        //         id: event.id,
+        //         title: event.title,
+        //         description: event.description,
+        //         start: getStartOfDay(event.end),
+        //         end: event.end,
+        //         color: event.color));
+        //   }
+        // } else {
+        //   events.add(event);
+        // }
+        if (!event.allDay) {
           events.add(event);
         }
       }

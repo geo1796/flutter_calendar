@@ -17,7 +17,8 @@ class WeekViewCells extends StatelessWidget {
           itemCount: cells.length,
           shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 7, childAspectRatio: itemWidth / cellHeight),
+              crossAxisCount: 7,
+              childAspectRatio: itemWidth / (cellHeight / 2.0)),
           itemBuilder: (ctx, i) => Container(
                 decoration: BoxDecoration(
                     border: Border(

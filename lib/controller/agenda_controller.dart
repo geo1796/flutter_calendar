@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar/model/cell.dart';
 import 'package:get/get.dart';
@@ -75,6 +73,14 @@ class AgendaController extends RxController {
       description: 'the eigth event',
       start: DateTime.now().add(const Duration()),
       end: DateTime.now().add(const Duration(minutes: 45)),
+      color: Colors.amber,
+    ),
+    Event(
+      id: '9',
+      title: 'event9',
+      description: 'the nineth event',
+      start: DateTime.now().add(const Duration()),
+      end: DateTime.now().add(const Duration(days: 8)),
       color: Colors.amber,
     ),
   ].obs;

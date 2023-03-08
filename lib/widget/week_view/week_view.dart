@@ -14,7 +14,6 @@ class WeekView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final days = getDays(date);
     final mediaQuery = MediaQuery.of(context);
     final AgendaController agendaController = Get.find();
     return SingleChildScrollView(

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar/model/cell.dart';
 import 'package:get/get.dart';
@@ -98,11 +100,28 @@ class AgendaController extends RxController {
         .toList();
   }
 
-  void updateEvent(Event event, DateTime newStart) {
-    event = events.firstWhere((e) => e.id == event.id);
+  void updateDrag(Event event, DateTime newStart) {
     final duration = event.end.difference(event.start);
     event.start = newStart;
     event.end = newStart.add(duration);
+    events.removeWhere((e) => e.id == event.id);
+    events.add(event);
+  }
+
+  void updateResizeStart(Event event, DateTime newStart) {
+    if (newStart.isAfter(event.end) || newStart.isAtSameMomentAs(event.end)) {
+      return;
+    }
+    event.start = newStart;
+    events.removeWhere((e) => e.id == event.id);
+    events.add(event);
+  }
+
+  void updateResizeEnd(Event event, DateTime newEnd) {
+    if (newEnd.isBefore(event.start) || newEnd.isAtSameMomentAs(event.start)) {
+      return;
+    }
+    event.end = newEnd;
     events.removeWhere((e) => e.id == event.id);
     events.add(event);
   }

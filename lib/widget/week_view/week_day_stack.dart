@@ -53,28 +53,7 @@ class WeekDayStack extends StatelessWidget {
           children: List.generate(events.length, (i) {
             final e = events[i];
             final position = getEventPosition(events, i);
-            return Positioned(
-              width: position.width,
-              top: position.top,
-              bottom: position.bottom,
-              left: position.left,
-              child: IgnorePointer(
-                ignoring: agendaController.dragging.value,
-                child: Draggable<Event>(
-                  onDragStarted: () => agendaController.dragging.value = true,
-                  onDragEnd: (_) => agendaController.dragging.value = false,
-                  onDragCompleted: () =>
-                      agendaController.dragging.value = false,
-                  maxSimultaneousDrags: 1,
-                  data: e,
-                  feedback: Container(),
-                  child: EventItem(
-                    width: dayWidth,
-                    event: e,
-                  ),
-                ),
-              ),
-            );
+            return EventItem(width: dayWidth, event: e, position: getEventPosition(events, i));
           }),
         ),
       );

@@ -27,6 +27,8 @@ class ResizableEvent extends StatelessWidget {
                   onDragEnd: (_) => agendaController.dragging.value = false,
                   onDragCompleted: () =>
                       agendaController.dragging.value = false,
+                  onDraggableCanceled: (v, o) =>
+                      agendaController.dragging.value = false,
                   maxSimultaneousDrags: 1,
                   data: EventResize(event, ResizeType.start),
                   feedback: Container(),
@@ -45,6 +47,8 @@ class ResizableEvent extends StatelessWidget {
                   onDragStarted: () => agendaController.dragging.value = true,
                   onDragEnd: (_) => agendaController.dragging.value = false,
                   onDragCompleted: () =>
+                      agendaController.dragging.value = false,
+                  onDraggableCanceled: (v, o) =>
                       agendaController.dragging.value = false,
                   maxSimultaneousDrags: 1,
                   data: EventResize(event, ResizeType.end),

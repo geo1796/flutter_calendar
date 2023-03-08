@@ -17,30 +17,13 @@ class ResizeTargetCell extends StatelessWidget {
             return false;
           }
           if (data.type == ResizeType.start) {
-            agendaController.updateResizeStart(data.event, cell.end);
+            agendaController.updateResizeStart(data.event, cell.start);
           }
           if (data.type == ResizeType.end) {
-            agendaController.updateResizeEnd(data.event, cell.start);
+            agendaController.updateResizeEnd(data.event, cell.end);
           }
           return true;
         },
         builder: (ctx, candidateData, rejectedData) => Container());
   }
 }
-
-// class DragTargetCell extends StatelessWidget {
-//   const DragTargetCell({super.key, required this.cell});
-//   final Cell cell;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final AgendaController agendaController = Get.find();
-//     return DragTarget<EventDrag>(
-//       onWillAccept: (data) {
-//         agendaController.updateEvent(data!.event, cell.start);
-//         return true;
-//       },
-//       builder: (context, candidateData, rejectedData) => Container(),
-//     );
-//   }
-// }

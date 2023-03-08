@@ -8,15 +8,18 @@ class WeekDayHeader extends StatelessWidget {
   final Day day;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
-      decoration: BoxDecoration(border: Border.all()),
-      child: Center(
-          child: Column(
+      decoration: BoxDecoration(color: theme.primaryColor),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(day.weekDay.helper.name),
-          Text(formatFR(day.date)),
+          Text(day.weekDay.helper.name,
+              style: TextStyle(color: theme.secondaryHeaderColor)),
+          Text(formatFR(day.date),
+              style: TextStyle(color: theme.secondaryHeaderColor)),
         ],
-      )),
+      ),
     );
   }
 }

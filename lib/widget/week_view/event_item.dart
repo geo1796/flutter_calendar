@@ -25,7 +25,6 @@ class EventItem extends StatelessWidget {
           left: position.left,
           child: IgnorePointer(
             ignoring: agendaController.dragging.value,
-            // child: DraggableEvent(event: event, width: width),
             child: Stack(children: [
               ResizableEvent(event: event, width: width),
               DraggableEvent(event: event, width: width),

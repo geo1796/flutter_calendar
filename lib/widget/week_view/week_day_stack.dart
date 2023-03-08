@@ -52,8 +52,10 @@ class WeekDayStack extends StatelessWidget {
         child: Stack(
           children: List.generate(events.length, (i) {
             final e = events[i];
-            final position = getEventPosition(events, i);
-            return EventItem(width: dayWidth, event: e, position: getEventPosition(events, i));
+            return EventItem(
+                width: dayWidth,
+                event: e,
+                position: getEventPosition(events, i));
           }),
         ),
       );

@@ -8,7 +8,6 @@ class CellItem extends StatelessWidget {
   final Cell cell;
   @override
   Widget build(BuildContext context) {
-    // return DragTargetCell(cell: cell);
     return Stack(
       children: [
         ResizeTargetCell(cell: cell),

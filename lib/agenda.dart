@@ -7,6 +7,10 @@ class Agenda extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WeekView();
+    return Center(
+      child: SizedBox(
+          width: MediaQuery.of(context).size.width * 2 / 3,
+          child: const WeekView()),
+    );
   }
 }

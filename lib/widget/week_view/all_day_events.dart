@@ -26,9 +26,9 @@ class AllDayEvents extends StatelessWidget {
             top = (cellHeight / 2) * i;
             bottom = (cellHeight / 2) * (events.length - (i + 1));
           } else {
-            top = (cellHeight / (events.length - 1)) * i;
-            bottom =
-                (cellHeight / (events.length - 1)) * (events.length - (i + 1));
+            top = (cellHeight / (events.length - (events.length - 2))) * i;
+            bottom = (cellHeight / (events.length - (events.length - 2))) *
+                (events.length - (i + 1));
           }
           return Positioned(
             top: top,

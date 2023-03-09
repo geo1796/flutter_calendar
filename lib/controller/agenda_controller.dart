@@ -91,14 +91,6 @@ class AgendaController extends RxController {
       end: DateTime.now().add(const Duration(days: 4)),
       color: Colors.blueGrey,
     ),
-    Event(
-      id: '11',
-      title: 'event11',
-      description: 'the eleventh event',
-      start: DateTime.now().add(const Duration(days: -2)),
-      end: DateTime.now().add(const Duration()),
-      color: Colors.lightGreen,
-    ),
   ].obs;
 
   List<Event> getEventsByCell(Cell cell) {

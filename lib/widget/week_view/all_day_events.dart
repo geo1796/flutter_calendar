@@ -23,11 +23,11 @@ class AllDayEvents extends StatelessWidget {
           final duration = e.end.difference(e.start);
           final width = (duration.inMinutes / (60.0 * 24.0)) * dayWidth;
           if (events.length % 2 == 0) {
-            top = (cellHeight / 2) * i;
-            bottom = (cellHeight / 2) * (events.length - (i + 1));
+            top = (hourHeight / 2) * i;
+            bottom = (hourHeight / 2) * (events.length - (i + 1));
           } else {
-            top = (cellHeight / (events.length - (events.length - 2))) * i;
-            bottom = (cellHeight / (events.length - (events.length - 2))) *
+            top = (hourHeight / (events.length - (events.length - 2))) * i;
+            bottom = (hourHeight / (events.length - (events.length - 2))) *
                 (events.length - (i + 1));
           }
           return Positioned(

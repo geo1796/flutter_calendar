@@ -65,11 +65,11 @@ String formatFR(DateTime date) {
   return dateFormat.format(date);
 }
 
-List<Cell> getCells(DateTime date) {
+List<Cell> getCells(DateTime date, int startHour, int endHour) {
   List<Cell> cells = [];
   final startOfWeek = getStartOfWeek(date);
   date = startOfWeek;
-  for (int y = 0; y < 48; y++) {
+  for (int y = 2*startHour; y < 2*endHour; y++) {
     for (int i = 0; i < 7; i++) {
       cells.add(Cell(
           start: date.add(Duration(minutes: y * 30)),

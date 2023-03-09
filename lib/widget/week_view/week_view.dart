@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar/controller/agenda_controller.dart';
+import 'package:flutter_calendar/controller/layout_controller.dart';
 import 'package:flutter_calendar/util/layout_util.dart';
 import 'package:flutter_calendar/widget/week_view/all_day_events.dart';
 import 'package:flutter_calendar/widget/week_view/week_view_events.dart';
@@ -11,10 +12,16 @@ import 'week_view_header.dart';
 import 'week_view_side_bar.dart';
 
 class WeekView extends StatelessWidget {
-  const WeekView({super.key});
+  const WeekView({super.key, this.startHour = 0, this.endHour = 24});
+  final int startHour;
+  final int endHour;
   @override
   Widget build(BuildContext context) {
     final AgendaController agendaController = Get.find();
+    agendaController.startHour.value = startHour;
+    agendaController.endHour.value = endHour;
+    final LayoutController layoutController = Get.find();
+    layoutController.dayHeigth.value = (endHour - startHour) * hourHeight;
     return SingleChildScrollView(child: LayoutBuilder(
       builder: (ctx, constraints) {
         final width = constraints.maxWidth;
@@ -26,7 +33,7 @@ class WeekView extends StatelessWidget {
               children: [
                 SizedBox(
                   width: width * 19 / 20,
-                  height: cellHeight,
+                  height: hourHeight,
                   child: Obx(() {
                     final days = getDays(agendaController.date.value);
                     return Row(
@@ -43,11 +50,13 @@ class WeekView extends StatelessWidget {
               children: [
                 Obx(() {
                   final date = agendaController.date.value;
-                  final allDayEvents =
-                      agendaController.getEventsByWeek(date).where((e) => e.allDay).toList();
+                  final allDayEvents = agendaController
+                      .getEventsByWeek(date)
+                      .where((e) => e.allDay)
+                      .toList();
                   return SizedBox(
                       width: width * 19 / 20,
-                      height: allDayEvents.length * (cellHeight / 2.0),
+                      height: allDayEvents.length * (hourHeight / 2.0),
                       child: AllDayEvents(
                         events: allDayEvents,
                       ));

@@ -13,7 +13,7 @@ class ResizableEvent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final duration = event.end.difference(event.start);
-    final heigth = cellHeight * (duration.inMinutes / 60.0);
+    final heigth = hourHeight * (duration.inMinutes / 60.0);
     final shouldExists = heigth > 32.0;
     final AgendaController agendaController = Get.find();
     return shouldExists

@@ -16,13 +16,15 @@ class WeekViewCells extends StatelessWidget {
       final AgendaController agendaController = Get.find();
       return Obx(() {
         final date = agendaController.date.value;
-        final cells = getCells(date);
+        final startHour = agendaController.startHour.value;
+        final endHour = agendaController.endHour.value;
+        final cells = getCells(date, startHour, endHour);
         return GridView.builder(
             itemCount: cells.length,
             shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 7,
-                childAspectRatio: itemWidth / (cellHeight / 2.0)),
+                childAspectRatio: itemWidth / (hourHeight / 2.0)),
             itemBuilder: (ctx, i) => Container(
                   decoration: BoxDecoration(
                       border: Border(

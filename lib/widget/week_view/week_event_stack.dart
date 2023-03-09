@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar/controller/agenda_controller.dart';
+import 'package:flutter_calendar/controller/layout_controller.dart';
 import 'package:flutter_calendar/model/event.dart';
 import 'package:flutter_calendar/model/event_position.dart';
 import 'package:flutter_calendar/util/layout_util.dart';
@@ -17,6 +18,7 @@ class WeekEventStack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AgendaController agendaController = Get.find();
+    final LayoutController layoutController = Get.find();
     return Obx(() {
       final events = <Event>[];
       final date = agendaController.date.value;
@@ -49,29 +51,31 @@ class WeekEventStack extends StatelessWidget {
         final duration2 = e2.end.difference(e2.start);
         return duration1 >= duration2 ? 0 : 1;
       });
+    final startHour = agendaController.startHour.value;
+    final endHour = agendaController.endHour.value;
       return SizedBox(
-        height: dayHeight,
+        height: layoutController.dayHeigth.value,
         child: Stack(
           children: List.generate(events.length, (i) {
             final e = events[i];
             return EventItem(
                 width: dayWidth,
                 event: e,
-                position: getEventPosition(events, i));
+                position: getEventPosition(events, i, startHour, endHour));
           }),
         ),
       );
     });
   }
 
-  EventPosition getEventPosition(List<Event> events, int index) {
+  EventPosition getEventPosition(List<Event> events, int index, int startHour, int endHour) {
     final currentEvent = events[index];
-    final top = (currentEvent.start.hour + currentEvent.start.minute / 60.0) *
-        cellHeight;
+    final top = ((currentEvent.start.hour - startHour) + currentEvent.start.minute / 60.0) *
+        hourHeight;
     var bottom = 0.0;
     if (currentEvent.start.day == currentEvent.end.day) {
       bottom = dayHeight -
-          (currentEvent.end.hour + currentEvent.end.minute / 60.0) * cellHeight;
+          ((currentEvent.end.hour + (endHour%24)) + currentEvent.end.minute / 60.0) * hourHeight;
     }
     var left = 0.0;
     var width = 0.0;

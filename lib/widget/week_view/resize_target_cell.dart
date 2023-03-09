@@ -15,7 +15,7 @@ class ResizeTargetCell extends StatelessWidget {
         onWillAccept: (data) {
           if (data == null) {
             return false;
-          }
+          }          
           if (data.type == ResizeType.start) {
             agendaController.updateResizeStart(data.event, cell.start);
           }

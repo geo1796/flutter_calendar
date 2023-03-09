@@ -10,7 +10,7 @@ class Agenda extends StatelessWidget {
     return Center(
       child: SizedBox(
           width: MediaQuery.of(context).size.width * 2 / 3,
-          child: const WeekView()),
+          child: const WeekView(startHour: 7, endHour: 21,)),
     );
   }
 }

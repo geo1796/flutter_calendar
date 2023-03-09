@@ -1,2 +1,2 @@
-const cellHeight = 50.0;
-const dayHeight = cellHeight * 24;
+const hourHeight = 50.0;
+const dayHeight = hourHeight * 24;

@@ -26,7 +26,7 @@ class WeekViewCells extends StatelessWidget {
             itemBuilder: (ctx, i) => Container(
                   decoration: BoxDecoration(
                       border: Border(
-                    bottom: cells.length - i <= 7
+                    bottom: cells.length - i <= 7 || cells[i].end.minute != 0
                         ? BorderSide.none
                         : const BorderSide(width: 1.0, color: Colors.black),
                     right: (i + 1) % 7 == 0

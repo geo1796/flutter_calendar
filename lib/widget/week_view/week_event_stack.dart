@@ -22,7 +22,26 @@ class WeekEventStack extends StatelessWidget {
       final date = agendaController.date.value;
       for (Event event in agendaController.getEventsByWeek(date)) {
         if (!event.allDay) {
-          events.add(event);
+          if (!isSameDay(event.start, event.end)) {
+            events.add(Event(
+                id: event.id,
+                title: event.title,
+                description: event.description,
+                start: event.start,
+                end: getEndOfDay(event.start),
+                color: event.color));
+            if (isSameWeek(event.end, date)) {
+              events.add(Event(
+                  id: event.id,
+                  title: event.title,
+                  description: event.description,
+                  start: getStartOfDay(event.end),
+                  end: event.end,
+                  color: event.color));
+            }
+          } else {
+            events.add(event);
+          }
         }
       }
       events.sort((e1, e2) {

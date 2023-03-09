@@ -171,6 +171,9 @@ class AgendaController extends RxController {
   }
 
   void updateResizeStart(Event event, DateTime newStart) {
+    if (!isSameDay(event.start, newStart)) {
+      return;
+    }
     event = events.firstWhere((e) => e.id == event.id); //important
     if (newStart.isAfter(event.end) || newStart.isAtSameMomentAs(event.end)) {
       return;
@@ -181,6 +184,9 @@ class AgendaController extends RxController {
   }
 
   void updateResizeEnd(Event event, DateTime newEnd) {
+    if (!isSameDay(event.end, newEnd)) {
+      return;
+    }
     event = events.firstWhere((e) => e.id == event.id); //important
     if (newEnd.isBefore(event.start) || newEnd.isAtSameMomentAs(event.start)) {
       return;

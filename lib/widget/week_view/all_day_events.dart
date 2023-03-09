@@ -15,8 +15,8 @@ class AllDayEvents extends StatelessWidget {
       return Stack(
         children: List.generate(events.length, (i) {
           final e = events[i];
-          var top = 0.0;
-          var bottom = 0.0;
+          double top;
+          double bottom;
           final left = getWeekDayFromDate(e.start).helper.index * dayWidth +
               (e.start.hour / 24.0) * dayWidth +
               (e.start.minute / (60.0 * 24.0)) * dayWidth;

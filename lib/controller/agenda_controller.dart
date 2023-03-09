@@ -10,8 +10,6 @@ class AgendaController extends RxController {
   var view = View.week.obs;
   var date = DateTime.now().obs;
   var dragging = false.obs;
-  var startHour = 0.obs;
-  var endHour = 24.obs;
   var events = [
     Event(
       id: '1',

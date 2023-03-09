@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar/controller/agenda_controller.dart';
+import 'package:flutter_calendar/controller/layout_controller.dart';
 import 'package:flutter_calendar/util/layout_util.dart';
 import 'package:get/get.dart';
 
@@ -8,10 +9,10 @@ class WeekViewSideBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AgendaController agendaController = Get.find();
+    final LayoutController layoutController = Get.find();
     return Obx(() {
-      final startHour = agendaController.startHour.value;
-      final endHour = agendaController.endHour.value;
+      final startHour = layoutController.startHour.value;
+      final endHour = layoutController.endHour.value;
       return Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: List.generate(

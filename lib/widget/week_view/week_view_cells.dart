@@ -4,6 +4,7 @@ import 'package:flutter_calendar/util/layout_util.dart';
 import 'package:flutter_calendar/widget/week_view/cell_item.dart';
 import 'package:get/get.dart';
 
+import '../../controller/layout_controller.dart';
 import '../../util/date_util.dart';
 
 class WeekViewCells extends StatelessWidget {
@@ -14,10 +15,11 @@ class WeekViewCells extends StatelessWidget {
     return LayoutBuilder(builder: (ctx, constraints) {
       final itemWidth = constraints.maxWidth / 7;
       final AgendaController agendaController = Get.find();
+      final LayoutController layoutController = Get.find();
       return Obx(() {
         final date = agendaController.date.value;
-        final startHour = agendaController.startHour.value;
-        final endHour = agendaController.endHour.value;
+        final startHour = layoutController.startHour.value;
+        final endHour = layoutController.endHour.value;
         final cells = getCells(date, startHour, endHour);
         return GridView.builder(
             itemCount: cells.length,

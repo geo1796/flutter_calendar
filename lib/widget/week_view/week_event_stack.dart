@@ -51,8 +51,8 @@ class WeekEventStack extends StatelessWidget {
         final duration2 = e2.end.difference(e2.start);
         return duration1 >= duration2 ? 0 : 1;
       });
-    final startHour = agendaController.startHour.value;
-    final endHour = agendaController.endHour.value;
+    final startHour = layoutController.startHour.value;
+    final endHour = layoutController.endHour.value;
       return SizedBox(
         height: layoutController.dayHeigth.value,
         child: Stack(

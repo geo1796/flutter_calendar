@@ -18,9 +18,9 @@ class WeekView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AgendaController agendaController = Get.find();
-    agendaController.startHour.value = startHour;
-    agendaController.endHour.value = endHour;
     final LayoutController layoutController = Get.find();
+    layoutController.startHour.value = startHour;
+    layoutController.endHour.value = endHour;
     layoutController.dayHeigth.value = (endHour - startHour) * hourHeight;
     return SingleChildScrollView(child: LayoutBuilder(
       builder: (ctx, constraints) {

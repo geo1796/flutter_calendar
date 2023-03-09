@@ -10,17 +10,23 @@ class Event {
   Color color;
   late bool allDay;
 
-  Event(
-      {required this.id,
-      required this.title,
-      required this.description,
-      required this.start,
-      required this.end,
-      required this.color}) {
-    if (isSameDay(start, end)) {
-      allDay = false;
+  Event({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.start,
+    required this.end,
+    required this.color,
+    bool? allDay,
+  }) {
+    if (allDay != null) {
+      this.allDay = allDay;
     } else {
-      allDay = true;
+      if (isSameDay(start, end)) {
+        this.allDay = false;
+      } else {
+        this.allDay = true;
+      }
     }
   }
 

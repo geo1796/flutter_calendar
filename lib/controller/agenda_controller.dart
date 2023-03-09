@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar/model/cell.dart';
 import 'package:get/get.dart';
@@ -74,8 +72,8 @@ class AgendaController extends RxController {
       title: 'event8',
       description: 'the eigth event',
       start: DateTime.now().add(const Duration()),
-      end: DateTime.now().add(const Duration(minutes: 45)),
-      color: Colors.amber,
+      end: DateTime.now().add(const Duration(days: 6)),
+      color: Colors.blue,
     ),
     Event(
       id: '9',
@@ -84,6 +82,22 @@ class AgendaController extends RxController {
       start: DateTime.now().add(const Duration()),
       end: DateTime.now().add(const Duration(days: 8)),
       color: Colors.amber,
+    ),
+    Event(
+      id: '10',
+      title: 'event10',
+      description: 'the tenth event',
+      start: DateTime.now().add(const Duration(days: -2)),
+      end: DateTime.now().add(const Duration(days: 4)),
+      color: Colors.blueGrey,
+    ),
+    Event(
+      id: '11',
+      title: 'event11',
+      description: 'the eleventh event',
+      start: DateTime.now().add(const Duration(days: -2)),
+      end: DateTime.now().add(const Duration()),
+      color: Colors.lightGreen,
     ),
   ].obs;
 
@@ -117,36 +131,36 @@ class AgendaController extends RxController {
         if (event.end.isAfter(getEndOfWeek(date))) {
           res.add(
             Event(
-              id: event.id,
-              title: event.title,
-              description: event.description,
-              start: getStartOfWeek(date),
-              end: getEndOfWeek(date),
-              color: event.color,
-            ),
+                id: event.id,
+                title: event.title,
+                description: event.description,
+                start: getStartOfWeek(date),
+                end: getEndOfWeek(date),
+                color: event.color,
+                allDay: event.allDay),
           );
         } else {
           res.add(
             Event(
-              id: event.id,
-              title: event.title,
-              description: event.description,
-              start: getStartOfWeek(date),
-              end: event.end,
-              color: event.color,
-            ),
+                id: event.id,
+                title: event.title,
+                description: event.description,
+                start: getStartOfWeek(date),
+                end: event.end,
+                color: event.color,
+                allDay: event.allDay),
           );
         }
       } else if (event.end.isAfter(getEndOfWeek(date))) {
         res.add(
           Event(
-            id: event.id,
-            title: event.title,
-            description: event.description,
-            start: event.start,
-            end: getEndOfWeek(date),
-            color: event.color,
-          ),
+              id: event.id,
+              title: event.title,
+              description: event.description,
+              start: event.start,
+              end: getEndOfWeek(date),
+              color: event.color,
+              allDay: event.allDay),
         );
       } else {
         res.add(event);

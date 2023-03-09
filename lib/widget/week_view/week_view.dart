@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar/controller/agenda_controller.dart';
 import 'package:flutter_calendar/util/layout_util.dart';
+import 'package:flutter_calendar/widget/week_view/all_day_events.dart';
 import 'package:flutter_calendar/widget/week_view/week_view_events.dart';
 import 'package:get/get.dart';
 import '../../util/date_util.dart';
@@ -21,11 +22,8 @@ class WeekView extends StatelessWidget {
           children: [
             const WeekViewHeader(),
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                SizedBox(
-                  width: width * 1 / 20,
-                  height: cellHeight,
-                ),
                 SizedBox(
                   width: width * 19 / 20,
                   height: cellHeight,
@@ -41,16 +39,30 @@ class WeekView extends StatelessWidget {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Obx(() {
+                  final date = agendaController.date.value;
+                  final allDayEvents =
+                      agendaController.getEventsByWeek(date).where((e) => e.allDay).toList();
+                  return SizedBox(
+                      width: width * 19 / 20,
+                      height: allDayEvents.length * (cellHeight / 2.0),
+                      child: AllDayEvents(
+                        events: allDayEvents,
+                      ));
+                }),
+              ],
+            ),
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(width: width * 1 / 20, child: const WeekViewSideBar()),
                 SizedBox(
                   width: width * 19 / 20,
-                  child: Stack(children: [
-                    Obx(() {
-                      return WeekViewCells(date: agendaController.date.value);
-                    }),
-                    const WeekViewEvents(),
+                  child: Stack(children: const [
+                    WeekViewCells(),
+                    WeekViewEvents(),
                   ]),
                 ),
               ],

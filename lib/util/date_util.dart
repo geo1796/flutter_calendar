@@ -81,6 +81,16 @@ List<Cell> getCells(DateTime date) {
   return cells;
 }
 
+List<Cell> getAllDayCells(DateTime date) {
+  List<Cell> cells = [];
+  date = getStartOfWeek(date);
+  for (int i = 0; i < 7; i++) {
+    cells.add(Cell(start: date, end: getEndOfDay(date)));
+    date = getNextDay(date);
+  }
+  return cells;
+}
+
 DateTime getNextDay(DateTime date) {
   return getStartOfDay(date.add(const Duration(days: 1)));
 }

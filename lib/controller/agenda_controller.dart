@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar/model/cell.dart';
 import 'package:get/get.dart';
@@ -101,9 +103,56 @@ class AgendaController extends RxController {
   }
 
   List<Event> getEventsByWeek(DateTime date) {
-    return events
-        .where((e) => isSameWeek(e.start, date) || isSameWeek(e.end, date))
+    final eventsByWeek = events
+        .where((e) =>
+            isSameWeek(e.start, date) ||
+            isSameWeek(e.end, date) ||
+            ((e.start.isBefore(date) || e.start.isAtSameMomentAs(date)) &&
+                    e.end.isAfter(date) ||
+                e.end.isAtSameMomentAs(date)))
         .toList();
+    final res = <Event>[];
+    for (Event event in eventsByWeek) {
+      if (event.start.isBefore(getStartOfWeek(date))) {
+        if (event.end.isAfter(getEndOfWeek(date))) {
+          res.add(
+            Event(
+              id: event.id,
+              title: event.title,
+              description: event.description,
+              start: getStartOfWeek(date),
+              end: getEndOfWeek(date),
+              color: event.color,
+            ),
+          );
+        } else {
+          res.add(
+            Event(
+              id: event.id,
+              title: event.title,
+              description: event.description,
+              start: getStartOfWeek(date),
+              end: event.end,
+              color: event.color,
+            ),
+          );
+        }
+      } else if (event.end.isAfter(getEndOfWeek(date))) {
+        res.add(
+          Event(
+            id: event.id,
+            title: event.title,
+            description: event.description,
+            start: event.start,
+            end: getEndOfWeek(date),
+            color: event.color,
+          ),
+        );
+      } else {
+        res.add(event);
+      }
+    }
+    return res;
   }
 
   void updateDrag(Event event, DateTime newStart) {
